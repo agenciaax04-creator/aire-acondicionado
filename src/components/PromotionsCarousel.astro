@@ -19,8 +19,8 @@ const slides = [
 ];
 
 const whatsappNumber = '529931524978';
-const whatsappUrlFor = (alt, src) => {
-  const text = `Hola, estoy interesado en la oferta: ${alt}. ¿Me puedes dar más información? (Imagen: ${src})`;
+const whatsappUrlFor = (alt, imageUrl) => {
+  const text = `Hola, estoy interesado en la oferta: ${alt}. ¿Me puedes dar más información? Link de la imagen: ${imageUrl}`;
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 };
 ---
@@ -45,6 +45,9 @@ const whatsappUrlFor = (alt, src) => {
                 rel="noreferrer"
                 class="block focus:outline-none focus:ring-4 focus:ring-brand-gold/30"
                 aria-label={`Consultar por WhatsApp: ${s.alt}`}
+                data-promos-wa
+                data-alt={s.alt}
+                data-src={s.src}
               >
                 <div class="aspect-square w-full bg-white">
                   <img src={s.src} alt={s.alt} class="h-full w-full object-contain" loading="lazy" />
@@ -90,6 +93,16 @@ const whatsappUrlFor = (alt, src) => {
           const track = root.querySelector('[data-promos-track]');
           const prev = root.querySelector('[data-promos-prev]');
           const next = root.querySelector('[data-promos-next]');
+
+          const waNumber = '529931524978';
+          root.querySelectorAll('[data-promos-wa]')?.forEach((a) => {
+            const alt = a.getAttribute('data-alt') || 'Oferta';
+            const src = a.getAttribute('data-src') || '';
+            if (!src) return;
+            const full = new URL(src, window.location.origin).toString();
+            const text = `Hola, estoy interesado en la oferta: ${alt}. ¿Me puedes dar más información? Link de la imagen: ${full}`;
+            a.setAttribute('href', `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`);
+          });
 
           if (!track) return;
 
