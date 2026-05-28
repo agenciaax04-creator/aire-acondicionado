@@ -1,11 +1,28 @@
 ---
-const slides = Array.from({ length: 4 }, (_, i) => {
-  const n = i + 1;
-  return {
-    alt: `Promoción ${n}`,
-    src: `/promotions/promo-${n}.jpeg`,
-  };
-});
+const slides = [
+  {
+    alt: 'Oferta: Minisplit LG 1 tonelada $5,999.00',
+    src: '/promotions/promo-1.jpeg',
+  },
+  {
+    alt: 'Oferta: Minisplit MIRAGE 1 tonelada $5,799.00',
+    src: '/promotions/promo-2.jpeg',
+  },
+  {
+    alt: 'Oferta: Minisplit 1 tonelada $4,999.00',
+    src: '/promotions/promo-3.jpeg',
+  },
+  {
+    alt: 'Oferta: Minisplit MIRAGE 1 tonelada $5,999.00',
+    src: '/promotions/promo-4.jpeg',
+  },
+];
+
+const whatsappNumber = '529931524978';
+const whatsappUrlFor = (alt, src) => {
+  const text = `Hola, estoy interesado en la oferta: ${alt}. ¿Me puedes dar más información? (Imagen: ${src})`;
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+};
 ---
 
 <section id="promociones" class="border-t border-slate-100 bg-white">
@@ -22,9 +39,21 @@ const slides = Array.from({ length: 4 }, (_, i) => {
         {slides.map((s) => (
           <div class="w-[82%] shrink-0 snap-start sm:w-[48%] lg:w-[32%]">
             <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft ring-1 ring-black/5">
-              <div class="aspect-square w-full bg-white">
-                <img src={s.src} alt={s.alt} class="h-full w-full object-contain" loading="lazy" />
-              </div>
+              <a
+                href={whatsappUrlFor(s.alt, s.src)}
+                target="_blank"
+                rel="noreferrer"
+                class="block focus:outline-none focus:ring-4 focus:ring-brand-gold/30"
+                aria-label={`Consultar por WhatsApp: ${s.alt}`}
+              >
+                <div class="aspect-square w-full bg-white">
+                  <img src={s.src} alt={s.alt} class="h-full w-full object-contain" loading="lazy" />
+                </div>
+                <div class="border-t border-slate-200 px-4 py-3">
+                  <p class="text-sm font-semibold leading-snug text-brand-navy">{s.alt}</p>
+                  <p class="mt-1 text-xs text-slate-600">Toca para solicitar información por WhatsApp</p>
+                </div>
+              </a>
             </div>
           </div>
         ))}
