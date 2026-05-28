@@ -22,7 +22,9 @@ const slides = Array.from({ length: 4 }, (_, i) => {
         {slides.map((s) => (
           <div class="w-[82%] shrink-0 snap-start sm:w-[48%] lg:w-[32%]">
             <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft ring-1 ring-black/5">
-              <img src={s.src} alt={s.alt} class="h-52 w-full object-cover sm:h-56" loading="lazy" />
+              <div class="aspect-square w-full bg-white">
+                <img src={s.src} alt={s.alt} class="h-full w-full object-contain" loading="lazy" />
+              </div>
             </div>
           </div>
         ))}
