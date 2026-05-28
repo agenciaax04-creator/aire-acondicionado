@@ -1,0 +1,53 @@
+---
+ import Icon from './Icon.astro';
+
+const features = [
+  {
+    title: 'Técnicos capacitados',
+    desc: 'Proceso profesional desde el diagnóstico hasta la entrega final, con explicación clara.',
+    icon: 'badge',
+  },
+  {
+    title: 'Trabajo limpio en casa',
+    desc: 'Protegemos el área, cuidamos paredes y pisos, y dejamos todo ordenado.',
+    icon: 'sparkles',
+  },
+  {
+    title: 'Puntualidad',
+    desc: 'Llegamos en el horario acordado y te avisamos cualquier cambio con anticipación.',
+    icon: 'clock',
+  },
+  {
+    title: 'Transparencia',
+    desc: 'Te damos opciones y costos antes de iniciar. Sin sorpresas al final.',
+    icon: 'list',
+  },
+];
+---
+
+<section id="beneficios" class="border-t border-slate-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight text-brand-navy">¿Por qué elegirnos?</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-slate-600">
+        Un servicio diseñado para hogares: cuidado, comunicación y resultados.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {features.slice(0, 3).map((f) => (
+        <article class="rounded-3xl border border-slate-200 bg-white p-7 text-center shadow-soft ring-1 ring-black/5">
+          <div class="flex flex-col items-center">
+            <div class="relative -mt-12 inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-soft ring-1 ring-slate-200">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-navy text-white">
+                <Icon name={f.icon} size={34} />
+              </div>
+            </div>
+            <h3 class="mt-5 text-base font-extrabold text-slate-900">{f.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{f.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

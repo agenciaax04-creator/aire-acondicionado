@@ -1,0 +1,78 @@
+---
+type Props = {
+  name: string;
+  size?: number;
+};
+
+const { name, size = 22 } = Astro.props;
+---
+
+{(() => {
+  if (name === 'shield') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2 20 6v7c0 5-3.4 9-8 9s-8-4-8-9V6l8-4Z" stroke="currentColor" stroke-width="1.6" />
+        <path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    );
+  }
+
+  if (name === 'wrench') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.2 2.2-2.2-2.2 2.4-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+      </svg>
+    );
+  }
+
+  if (name === 'snow') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2c3 3 3 5 0 8-3-3-3-5 0-8Z" stroke="currentColor" stroke-width="1.6" />
+        <path d="M12 10v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M6 12c2 2 2 4 0 6-2-2-2-4 0-6Z" stroke="currentColor" stroke-width="1.6" />
+        <path d="M18 12c2 2 2 4 0 6-2-2-2-4 0-6Z" stroke="currentColor" stroke-width="1.6" />
+      </svg>
+    );
+  }
+
+  if (name === 'badge') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2 15 6l5 1-3 4 1 5-6-2-6 2 1-5-3-4 5-1 3-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        <path d="M9 21v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M15 21v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    );
+  }
+
+  if (name === 'sparkles') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2l1.2 4.2L17.4 8 13.2 9.2 12 13.4 10.8 9.2 6.6 8l4.2-1.8L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        <path d="M5 13l.7 2.4L8 16l-2.3.6L5 19l-.7-2.4L2 16l2.3-.6L5 13Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        <path d="M19 13l.7 2.4L22 16l-2.3.6L19 19l-.7-2.4L16 16l2.3-.6L19 13Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+      </svg>
+    );
+  }
+
+  if (name === 'clock') {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.6" />
+        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 6h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M8 12h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M8 18h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      <path d="M3 6h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+      <path d="M3 12h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+      <path d="M3 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  );
+})()}

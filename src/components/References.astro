@@ -1,0 +1,200 @@
+---
+const referencias = [
+  {
+    nombre: 'María González',
+    lugar: 'Centro',
+    texto:
+      'Instalaron el minisplit en el mismo día y dejaron todo limpio. Muy puntuales y profesionales.',
+  },
+  {
+    nombre: 'Carlos Ramírez',
+    lugar: 'Tamulte',
+    texto:
+      'El mantenimiento quedó excelente, el equipo enfría más rápido y ya no hace ruido. Recomendados.',
+  },
+  {
+    nombre: 'Andrea López',
+    lugar: 'Pomoca',
+    texto:
+      'Me explicaron el problema con claridad y me dieron opciones. Trabajo impecable y a buen precio.',
+  },
+  {
+    nombre: 'Javier Hernández',
+    lugar: 'Nacajuca',
+    texto:
+      'Atención rápida por WhatsApp y llegaron a la hora acordada. Servicio muy confiable.',
+  },
+  {
+    nombre: 'Sofía Martínez',
+    lugar: 'KM 10',
+    texto:
+      'La reparación fue inmediata y el técnico muy amable. Se nota la experiencia.',
+  },
+  {
+    nombre: 'Luis Torres',
+    lugar: 'Jalpa',
+    texto:
+      'Quedó perfecta la instalación, cuidaron paredes y cableado. Muy ordenados al trabajar.',
+  },
+  {
+    nombre: 'Fernanda Pérez',
+    lugar: 'Pyasur',
+    texto:
+      'Excelente trato y garantía. Me resolvieron el tema del drenaje que otros no pudieron.',
+  },
+  {
+    nombre: 'Miguel Sánchez',
+    lugar: 'Centro',
+    texto:
+      'Servicio de mantenimiento completo, revisaron presión y limpieza. El aire quedó como nuevo.',
+  },
+  {
+    nombre: 'Paola Díaz',
+    lugar: 'Tamulte',
+    texto:
+      'Me ayudaron a elegir la capacidad correcta para mi casa. Muy honestos y transparentes.',
+  },
+  {
+    nombre: 'Ricardo Vega',
+    lugar: 'Pomoca',
+    texto:
+      'Instalación rápida, sin vueltas. Cumplieron lo prometido y el resultado se ve profesional.',
+  },
+  {
+    nombre: 'Valeria Navarro',
+    lugar: 'Nacajuca',
+    texto:
+      'Buenísima experiencia: puntuales, limpios y el aire enfría excelente. Los volveré a llamar.',
+  },
+  {
+    nombre: 'Daniel Castillo',
+    lugar: 'KM 10',
+    texto:
+      'Solucionaron una fuga y dejaron el equipo trabajando perfecto. Muy recomendables.',
+  },
+];
+
+const inicial = (nombre) => (nombre?.trim()?.[0] || '?').toUpperCase();
+
+const slides = Array.from({ length: Math.ceil(referencias.length / 3) }, (_, i) =>
+  referencias.slice(i * 3, i * 3 + 3),
+);
+---
+
+<section id="referencias" class="border-t border-slate-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="text-center">
+      <p class="text-xs font-semibold tracking-[0.24em] text-brand-navy/70">Nuestros clientes nos respaldan</p>
+      <h2 class="mt-2 text-4xl font-extrabold tracking-tight text-brand-navy">Referencias</h2>
+    </div>
+
+    <div class="relative mt-10" data-ref-carousel>
+      <div class="relative min-h-[220px] sm:min-h-[240px] lg:min-h-[260px]">
+        {slides.map((group, i) => (
+          <div
+            data-ref-slide
+            aria-hidden={i === 0 ? 'false' : 'true'}
+            class={`absolute inset-0 grid grid-cols-1 gap-6 transition-all duration-700 ease-out sm:grid-cols-2 lg:grid-cols-3 ${
+              i === 0
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
+                : 'opacity-0 translate-y-2 pointer-events-none'
+            }`}
+          >
+            {group.map((r, j) => (
+              <article
+                class={`rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-soft ring-1 ring-black/5 ${
+                  j === 0 ? '' : j === 1 ? 'hidden sm:block' : 'hidden lg:block'
+                }`}
+              >
+                <div class="flex gap-1 text-brand-gold" aria-hidden="true">
+                  {Array.from({ length: 5 }).map(() => (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 17.27l5.18 3.73-1.98-6.01L20 9.24h-6.19L12 3 10.19 9.24H4l4.8 5.75L6.82 21z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p class="ref-clamp mt-3 text-[13px] italic leading-relaxed text-slate-600">“{r.texto}”</p>
+
+                <div class="mt-5 flex items-center gap-3">
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-navy text-white"
+                    aria-hidden="true"
+                  >
+                    <span class="text-sm font-bold">{inicial(r.nombre)}</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-brand-navy">{r.nombre}</p>
+                    <p class="text-xs text-slate-500">{r.lugar}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <script is:inline>
+        (() => {
+          const root = document.currentScript?.closest('[data-ref-carousel]');
+          if (!root) return;
+
+          const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+          const slides = Array.from(root.querySelectorAll('[data-ref-slide]'));
+          if (slides.length <= 1) return;
+
+          let index = 0;
+
+          const setActive = (next) => {
+            index = (next + slides.length) % slides.length;
+            slides.forEach((el, i) => {
+              const active = i === index;
+              el.classList.toggle('opacity-100', active);
+              el.classList.toggle('opacity-0', !active);
+              el.classList.toggle('translate-y-0', active);
+              el.classList.toggle('translate-y-2', !active);
+              el.classList.toggle('pointer-events-auto', active);
+              el.classList.toggle('pointer-events-none', !active);
+              el.setAttribute('aria-hidden', active ? 'false' : 'true');
+            });
+          };
+
+          if (reduced) {
+            setActive(0);
+            return;
+          }
+
+          let timer = null;
+          const start = () => {
+            if (timer) return;
+            timer = window.setInterval(() => {
+              setActive(index + 1);
+            }, 3800);
+          };
+
+          const stop = () => {
+            if (!timer) return;
+            window.clearInterval(timer);
+            timer = null;
+          };
+
+          root.addEventListener('mouseenter', stop);
+          root.addEventListener('mouseleave', start);
+          root.addEventListener('focusin', stop);
+          root.addEventListener('focusout', start);
+
+          start();
+        })();
+      </script>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ref-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+const whatsappNumber = '529931524978';
+const whatsappText = encodeURIComponent('Hola, me gustaría cotizar un servicio de aire acondicionado residencial.');
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
+---
+
+<section id="contacto" class="border-t border-slate-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="mb-10 text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight text-brand-navy">¿NECESITÁS UN TÉCNICO?</h2>
+      <p class="mx-auto mt-3 max-w-3xl text-slate-600">
+        ¿Tienes dudas sobre nuestros servicios? Escríbenos y te responderemos a la brevedad. Atención directa por WhatsApp,
+        correo o teléfono.
+      </p>
+    </div>
+
+    <div class="rounded-3xl bg-brand-navy p-1 shadow-soft">
+      <div class="rounded-[1.35rem] bg-white">
+        <div class="grid gap-10 p-6 sm:p-10 md:grid-cols-2 md:items-center">
+          <div>
+            <h2 class="text-3xl font-extrabold tracking-tight text-brand-navy">¿Listo para sentir el cambio?</h2>
+            <p class="mt-3 text-slate-600">
+              Escríbenos por WhatsApp o deja tus datos y te contactamos. Servicio estrictamente residencial.
+            </p>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 text-sm font-semibold text-slate-950 shadow-soft ring-1 ring-black/5 hover:brightness-95"
+              >
+                WhatsApp directo
+              </a>
+              <a
+                href="tel:+529931524978"
+                class="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-brand-navy shadow-sm hover:bg-slate-50"
+              >
+                Llamar
+              </a>
+            </div>
+
+            <div class="mt-6 grid gap-2 text-sm text-slate-600">
+              <div class="flex gap-2">
+                <span class="mt-2 inline-flex h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
+                <span>Atendemos: minisplits, ventana y centrales del hogar</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="mt-2 inline-flex h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
+                <span>Sin servicios comerciales ni industriales</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="rounded-3xl border border-slate-200 bg-slate-50 p-6" method="post" action="#">
+            <div class="grid gap-4">
+              <div>
+                <label class="text-sm font-semibold text-slate-800" for="nombre">Nombre</label>
+                <input
+                  id="nombre"
+                  name="nombre"
+                  required
+                  class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-brand-gold/40 focus:ring-4"
+                  placeholder="Tu nombre"
+                />
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold text-slate-800" for="telefono">Teléfono</label>
+                <input
+                  id="telefono"
+                  name="telefono"
+                  required
+                  class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-brand-gold/40 focus:ring-4"
+                  placeholder="(55) 0000 0000"
+                />
+              </div>
+
+              <div>
+                <label class="text-sm font-semibold text-slate-800" for="mensaje">Mensaje</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows={4}
+                  class="mt-2 w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-brand-gold/40 focus:ring-4"
+                  placeholder="Ej. No enfría / gotea / quiero instalación de minisplit..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 text-sm font-semibold text-slate-950 shadow-soft ring-1 ring-black/5 hover:brightness-95"
+              >
+                Enviar
+              </button>
+
+              <p class="text-xs text-slate-500">
+                Este formulario es de demostración (sin backend). Si quieres, lo conecto a Formspree, Netlify Forms o WhatsApp.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

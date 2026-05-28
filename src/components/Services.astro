@@ -1,0 +1,84 @@
+---
+ import Icon from './Icon.astro';
+
+const services = [
+  {
+    title: 'Mantenimiento Preventivo',
+    desc: 'Limpieza profunda, revisión de gas y verificación de drenajes para que enfríe como debe.',
+    items: ['Lavado de filtros y serpentines', 'Revisión de presión y gas', 'Limpieza de drenaje y charola'],
+    icon: 'shield',
+  },
+  {
+    title: 'Reparación',
+    desc: 'Solución de goteos, ruidos y fallas de enfriamiento con diagnóstico claro y rápido.',
+    items: ['Fugas y goteos', 'Ruidos/vibraciones', 'Bajo rendimiento o no enfría'],
+    icon: 'wrench',
+  },
+  {
+    title: 'Instalación',
+    desc: 'Montaje seguro de equipos nuevos, cuidando tu casa y dejando todo funcionando al 100%.',
+    items: ['Instalación de minisplit', 'Aire de ventana', 'Sistemas centrales del hogar'],
+    icon: 'snow',
+  },
+];
+---
+
+<section id="servicios" class="border-t border-slate-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight text-brand-navy">Nuestros servicios de climatización</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-slate-600">
+        Servicio exclusivo para hogares: mantenimiento, reparación e instalación con trabajo limpio y puntual.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-8 max-w-4xl rounded-2xl bg-slate-50 px-6 py-5 text-slate-600 ring-1 ring-slate-200">
+      <div class="flex gap-4">
+        <div class="w-1 shrink-0 rounded-full bg-brand-navy"></div>
+        <p class="leading-relaxed">
+          Somos técnicos especializados en aire acondicionado residencial en Villahermosa, Tabasco. Instalamos equipos nuevos,
+          realizamos mantenimiento preventivo y reparamos fallas comunes (no enfría, goteo, ruidos o bajo rendimiento) en minisplits,
+          equipos de ventana y sistemas centrales del hogar. Si buscas un servicio confiable en Villahermosa y alrededores,
+          coordinamos una visita sin compromiso.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {services.map((s) => (
+        <article class="rounded-3xl border border-slate-200 bg-white p-7 shadow-soft ring-1 ring-black/5">
+          <div class="flex flex-col items-center text-center">
+            <div class="relative -mt-12 inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-soft ring-1 ring-slate-200">
+              <div class="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-navy text-white">
+                <Icon name={s.icon} size={34} />
+              </div>
+            </div>
+
+            <h3 class="mt-5 text-lg font-extrabold text-slate-900">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
+          </div>
+
+          <ul class="mt-5 grid gap-2 text-sm text-slate-700">
+            {s.items.map((i) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand-navy/10 text-brand-navy">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span>{i}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contacto"
+            class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-brand-navy px-5 py-3 text-sm font-extrabold text-white shadow-sm hover:brightness-110"
+          >
+            Solicitar cotización
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

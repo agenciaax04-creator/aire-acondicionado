@@ -1,0 +1,183 @@
+---
+type Props = {
+  class?: string;
+};
+
+const { class: className = '' } = Astro.props as Props;
+
+const slides = [
+  {
+    kicker: 'SERVICIO RESIDENCIAL',
+    title: 'MANTENIMIENTO',
+    desc: 'Limpieza profunda, revisión y ajuste para que tu equipo rinda al 100%.',
+    src: '/hero/mantenimiento.jpeg',
+  },
+  {
+    kicker: 'SERVICIO RESIDENCIAL',
+    title: 'REPARACIÓN',
+    desc: 'Solución de goteos, ruidos y fallas de enfriamiento con diagnóstico claro.',
+    src: '/hero/reparacion.jpeg',
+  },
+  {
+    kicker: 'SERVICIO RESIDENCIAL',
+    title: 'INSTALACIONES',
+    desc: 'Montaje seguro y limpio de minisplits, ventana y central para el hogar.',
+    src: '/hero/instalaciones.jpeg',
+  },
+  {
+    kicker: 'SERVICIO RESIDENCIAL',
+    title: 'LIMPIEZA PROFUNDA',
+    desc: 'Elimina polvo y suciedad en serpentines para mejorar el rendimiento.',
+    src: '/hero/limpieza-profunda.jpeg',
+  },
+  {
+    kicker: 'SERVICIO RESIDENCIAL',
+    title: 'DIAGNÓSTICO',
+    desc: 'Revisión completa para detectar la causa real del problema antes de reparar.',
+    src: '/hero/diagnostico.jpeg',
+  },
+];
+---
+
+<div
+  class={className}
+  data-carousel
+  data-interval="3000"
+  aria-label="Carrusel de servicios"
+>
+  <div class="relative h-full w-full overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-tr from-brand-navy/20 via-transparent to-brand-gold/15"></div>
+
+    {slides.map((s, idx) => (
+      <figure
+        class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+        data-slide
+        aria-hidden={idx === 0 ? 'false' : 'true'}
+        style={{ opacity: idx === 0 ? '1' : '0' }}
+      >
+        <img
+          src={s.src}
+          alt={s.title}
+          class="h-full w-full object-cover"
+          loading={idx === 0 ? 'eager' : 'lazy'}
+        />
+
+        <div class="absolute inset-0 bg-black/45"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+
+        <figcaption class="absolute inset-0">
+          <div class="mx-auto grid h-full max-w-6xl items-center px-5 sm:px-6">
+            <div class="max-w-xl">
+              <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white ring-1 ring-white/20 backdrop-blur">
+                <span class="inline-flex h-2 w-2 rounded-full bg-brand-gold"></span>
+                {s.kicker}
+              </div>
+
+              <div class="mt-3 break-words text-balance text-[clamp(2.25rem,10vw,3.5rem)] font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl">
+                {s.title}
+              </div>
+
+              <p class="mt-4 text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
+                {s.desc}
+              </p>
+
+              <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="#contacto"
+                  class="inline-flex items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 text-sm font-extrabold tracking-wide text-slate-950 shadow-soft ring-1 ring-black/5 hover:brightness-95"
+                >
+                  Solicitar cotización
+                </a>
+                <a
+                  href="#servicios"
+                  class="inline-flex items-center justify-center rounded-2xl bg-white/10 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/25 backdrop-blur hover:bg-white/15"
+                >
+                  Ver servicios
+                </a>
+              </div>
+            </div>
+          </div>
+        </figcaption>
+      </figure>
+    ))}
+
+    <button
+      type="button"
+      class="absolute left-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/25 backdrop-blur hover:bg-white/15 md:inline-flex"
+      aria-label="Anterior"
+      data-prev
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button
+      type="button"
+      class="absolute right-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/25 backdrop-blur hover:bg-white/15 md:inline-flex"
+      aria-label="Siguiente"
+      data-next
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <script is:inline>
+      (() => {
+        const root = document.currentScript?.closest('[data-carousel]');
+        if (!root) return;
+
+        const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+        const intervalMs = Number(root.getAttribute('data-interval') || '3000');
+
+        const slides = Array.from(root.querySelectorAll('[data-slide]'));
+        const prev = root.querySelector('[data-prev]');
+        const next = root.querySelector('[data-next]');
+        if (!slides.length) return;
+
+        let index = 0;
+        let timer = null;
+
+        const setActive = (next) => {
+          index = (next + slides.length) % slides.length;
+          slides.forEach((el, i) => {
+            const active = i === index;
+            el.style.opacity = active ? '1' : '0';
+            el.setAttribute('aria-hidden', active ? 'false' : 'true');
+          });
+        };
+
+        const start = () => {
+          if (reduced) return;
+          if (timer) return;
+          timer = window.setInterval(() => setActive(index + 1), intervalMs);
+        };
+
+        const stop = () => {
+          if (!timer) return;
+          window.clearInterval(timer);
+          timer = null;
+        };
+
+        prev?.addEventListener('click', () => {
+          setActive(index - 1);
+          stop();
+          start();
+        });
+        next?.addEventListener('click', () => {
+          setActive(index + 1);
+          stop();
+          start();
+        });
+
+        root.addEventListener('mouseenter', stop);
+        root.addEventListener('mouseleave', start);
+        root.addEventListener('focusin', stop);
+        root.addEventListener('focusout', start);
+
+        setActive(0);
+        start();
+      })();
+    </script>
+  </div>
+</div>
